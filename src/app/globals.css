@@ -1,0 +1,174 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg-primary: #071638;
+  --bg-secondary: #0E2F76;
+  --text-primary: #F4FEFF;
+  --text-secondary: #A9C0E0;
+  --accent-rgb: 14, 47, 118;
+  --accent-glow: #38bdf8;
+  --glass-bg: rgba(14, 47, 118, 0.24);
+  --glass-border: rgba(244, 254, 255, 0.16);
+  --glass-highlight: rgba(244, 254, 255, 0.28);
+  --glass-blur: 18px;
+}
+
+html.light {
+  --bg-primary: #eef6ff;
+  --bg-secondary: #dbeafe;
+  --text-primary: #071638;
+  --text-secondary: #1e3a8a;
+  --glass-bg: rgba(255, 255, 255, 0.58);
+  --glass-border: rgba(14, 47, 118, 0.15);
+  --glass-highlight: rgba(255, 255, 255, 0.85);
+}
+
+/* Dynamic Accent Palettes */
+[data-accent="royal"] {
+  --accent-rgb: 56, 189, 248;
+  --accent-glow: #38bdf8;
+}
+[data-accent="cyan"] {
+  --accent-rgb: 34, 211, 238;
+  --accent-glow: #22d3ee;
+}
+[data-accent="violet"] {
+  --accent-rgb: 168, 85, 247;
+  --accent-glow: #a855f7;
+}
+[data-accent="emerald"] {
+  --accent-rgb: 16, 185, 129;
+  --accent-glow: #10b981;
+}
+[data-accent="rose"] {
+  --accent-rgb: 244, 63, 94;
+  --accent-glow: #f43f5e;
+}
+
+/* Dynamic Glass Blur Intensities */
+[data-blur="sm"] {
+  --glass-blur: 8px;
+}
+[data-blur="md"] {
+  --glass-blur: 18px;
+}
+[data-blur="lg"] {
+  --glass-blur: 30px;
+}
+
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  overflow-x: hidden;
+  min-height: 100vh;
+  transition: background-color 0.4s ease, color 0.3s ease;
+}
+
+/* ==========================================================================
+   LIQUID GLASS UI ENGINE
+   ========================================================================== */
+
+.liquid-glass {
+  position: relative;
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur)) saturate(185%);
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(185%);
+  border: 1px solid var(--glass-border);
+  box-shadow:
+    0 10px 35px -5px rgba(4, 12, 32, 0.38),
+    inset 0 1px 1px 0 var(--glass-highlight),
+    inset 0 -1px 1px 0 rgba(255, 255, 255, 0.05);
+  transition:
+    transform 0.32s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.32s ease,
+    box-shadow 0.32s ease,
+    background-color 0.32s ease;
+}
+
+.liquid-glass-interactive:hover {
+  border-color: rgba(var(--accent-rgb), 0.55);
+  box-shadow:
+    0 14px 40px -8px rgba(var(--accent-rgb), 0.25),
+    inset 0 1px 2px 0 var(--glass-highlight);
+}
+
+/* Specular diagonal sheen on hover */
+.liquid-sheen {
+  position: relative;
+  overflow: hidden;
+}
+
+.liquid-sheen::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -120%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(244, 254, 255, 0.14),
+    transparent
+  );
+  transform: skewX(-25deg);
+  transition: left 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+  pointer-events: none;
+}
+
+.liquid-sheen:hover::before,
+.liquid-sheen:focus-visible::before {
+  left: 150%;
+}
+
+/* Glass Pill Button */
+.glass-pill {
+  background: rgba(244, 254, 255, 0.07);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-border);
+  box-shadow: inset 0 1px 0 0 var(--glass-highlight);
+  transition: all 0.25s ease;
+}
+
+html.light .glass-pill {
+  background: rgba(14, 47, 118, 0.06);
+}
+
+.glass-pill:hover {
+  border-color: rgba(var(--accent-rgb), 0.6);
+  background: rgba(var(--accent-rgb), 0.15);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(169, 192, 224, 0.25);
+  border-radius: 9999px;
+}
+
+/* Low-end Android / Reduced Motion Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
