@@ -1,0 +1,24 @@
+{
+  "name": "FUSION | Official Links & Hub",
+  "short_name": "FUSION Hub",
+  "description": "Digital design, custom wallpapers, web builds, and official social links.",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#071638",
+  "theme_color": "#0E2F76",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "https://api.dicebear.com/9.x/shapes/svg?seed=FusionGlass&backgroundColor=071638",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "https://api.dicebear.com/9.x/shapes/svg?seed=FusionGlass&backgroundColor=071638",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
