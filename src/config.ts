@@ -73,7 +73,7 @@ export interface SiteConfig {
 
 export const siteConfig: SiteConfig = {
   profile: {
-    name: 'FUSION WALLPAPER',
+    name: 'FUSION',
     handle: '@fusionwallpaper',
     tagline: 'Digital Designer • Visual Aesthetics • Web Creator',
     bio: 'Crafting ultra-clean 4K mobile wallpapers, parametric 3D visuals, and modern web experiences straight from mobile.',
@@ -92,9 +92,9 @@ export const siteConfig: SiteConfig = {
   socials: [
     {
       platform: 'telegram',
-      url: 'https://t.me/username',
+      url: 'https://t.me/fusionwallpaper',
       label: 'Telegram Channel',
-      username: '@fusionwallpapers',
+      username: '@fusionwallpaper',
     },
     {
       platform: 'threads',
