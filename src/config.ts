@@ -77,7 +77,7 @@ export const siteConfig: SiteConfig = {
     handle: '@fusionwallpaper',
     tagline: 'Digital Designer • Visual Aesthetics • Web Creator',
     bio: 'Crafting ultra-clean 4K mobile wallpapers, parametric 3D visuals, and modern web experiences straight from mobile.',
-    avatar: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=600&auto=format&fit=crop',
+    avatar: 'https://kommodo.ai/i/p74mAXd09lUuiE39DKkC',
     verified: true,
     location: 'USA',
     statusText: 'Dropping new 4K lockscreen packs weekly',
