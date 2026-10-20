@@ -192,17 +192,18 @@ export const siteConfig: SiteConfig = {
     },
   ],
 
-  embeds: {
+    embeds: {
     wallpaperGallery: {
       enabled: true,
       title: 'Aesthetic Wallpapers Collection',
-      subtitle: '5 wallpapers • 4K | Anime | Nature | Dark',
-      viewAllUrl: 'https://t.me/your-channel-or-google-drive-link', // Put your Telegram or Google Drive link here
+      subtitle: '5 wallpapers • 4K | Anime | Dark',
+      viewAllUrl: 'https://t.me/fusionwallvibe',
       images: [
-        '/wall1.jpg',
-        '/wall2.jpg',
-        '/wall3.jpg',
-        '/wall4.jpg',
+        '/Akane Kurokawa By @fusionwallvibe.jpg',
+        '/Akane Sakuramori By @fusionwallvibe.jpg',
+        '/Boa Hancock By @fusionwallvibe (1).jpg',
+        '/Rei Ayanami By @fusionwallvibe.jpg',
+        '/Marin Kitagawa By - @fusionwallvibe.jpg',
       ],
     },
     spotify: {
