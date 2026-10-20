@@ -98,15 +98,15 @@ export const siteConfig: SiteConfig = {
     },
     {
       platform: 'threads',
-      url: 'https://threads.net/@username',
+      url: 'https://www.threads.com/@fusionwallpaper',
       label: 'Threads',
-      username: '@fusion',
+      username: '@fusionwallpaper',
     },
     {
       platform: 'instagram',
-      url: 'https://instagram.com/username',
+      url: 'https://www.instagram.com/fusionwallpaper?cplk=MXdyYTFmeHQ2YXk4YQ==',
       label: 'Instagram',
-      username: '@fusion.design',
+      username: '@fusionwallpaper',
     },
     {
       platform: 'github',
