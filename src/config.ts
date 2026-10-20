@@ -78,6 +78,7 @@ export const siteConfig: SiteConfig = {
     tagline: 'Digital Designer • Visual Aesthetics • Web Creator',
     bio: 'Crafting ultra-clean 4K mobile wallpapers, parametric 3D visuals, and modern web experiences straight from mobile.',
     avatar: '/IMG_20260329_192842.png',
+    banner: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1200&auto=format&fit=crop',
     verified: true,
     location: 'USA',
     statusText: 'Dropping new 4K lockscreen packs weekly',
