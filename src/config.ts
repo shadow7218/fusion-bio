@@ -136,6 +136,16 @@ export const siteConfig: SiteConfig = {
       featured: true,
     },
     {
+      id: 'fusion-pc-wallpapers',
+      title: 'PC Wallpapers — Official Telegram',
+      subtitle: 'Ultra-wide & 4K desktop anime wallpapers',
+      url: 'https://t.me/+JF18BTYzeb9lYjhl',
+      category: 'Wallpapers',
+      icon: 'Send',
+      badge: 'PC 4K',
+      featured: true,
+    },
+    {
       id: 'telegram-cloud-drops',
       title: 'Telegram 4K Wallpaper Vault',
       subtitle: 'Instant raw files, lockscreen setups & exclusive daily drops',
