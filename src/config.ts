@@ -23,6 +23,7 @@ export interface SiteConfig {
     tagline: string;
     bio: string;
     avatar: string;
+    banner: string;
     verified: boolean;
     location: string;
     statusText: string;
