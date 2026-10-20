@@ -37,10 +37,12 @@ export interface SiteConfig {
   categories: ('All' | 'Featured' | 'Projects' | 'Wallpapers' | 'Resources')[];
   links: LinkItem[];
   embeds: {
-    youtube: {
+    wallpaperGallery?: {
       enabled: boolean;
       title: string;
-      videoId: string; // The ID after v= in a YouTube URL
+      subtitle: string;
+      viewAllUrl: string;
+      images: string[];
     };
     spotify: {
       enabled: boolean;
