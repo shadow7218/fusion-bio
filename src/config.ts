@@ -201,11 +201,9 @@ export const siteConfig: SiteConfig = {
       subtitle: '5 wallpapers • 4K | Anime | Dark',
       viewAllUrl: 'https://t.me/fusionwallvibe',
       images: [
-        '/Akane Kurokawa By @fusionwallvibe.jpg',
-        '/Akane Sakuramori By @fusionwallvibe.jpg',
-        '/Boa Hancock By @fusionwallvibe (1).jpg',
-        '/Rei Ayanami By @fusionwallvibe.jpg',
-        '/Marin Kitagawa By - @fusionwallvibe.jpg',
+        '/Waguri Kaoruko By @fusionwallvibe.jpg',
+        '/Denia By @fusionwallvibe.jpg',
+        '/Hinata Hyuga By @fusionwallvibe (2).jpg',
       ],
     },
     spotify: {
