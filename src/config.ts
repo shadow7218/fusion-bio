@@ -131,7 +131,7 @@ export const siteConfig: SiteConfig = {
       subtitle: '4K anime and minimalist lockscreens',
       url: 'https://t.me/fusionwallvibe',
       category: 'Wallpapers',
-      icon: './my-logo.png',
+      icon: './my-logo.png.webp',
       badge: 'NEW DROP',
       featured: true,
     },
