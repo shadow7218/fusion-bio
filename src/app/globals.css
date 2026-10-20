@@ -58,6 +58,12 @@ html.light {
   --glass-blur: 30px;
 }
 
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
 * {
   box-sizing: border-box;
   -webkit-tap-highlight-color: transparent;
@@ -65,6 +71,10 @@ html.light {
 
 body {
   background-color: var(--bg-primary);
+  background-image: 
+    radial-gradient(circle at 15% 15%, rgba(14, 47, 118, 0.4) 0%, transparent 40%),
+    radial-gradient(circle at 85% 85%, rgba(56, 189, 248, 0.12) 0%, transparent 45%),
+    radial-gradient(circle at 50% 50%, var(--bg-primary) 100%);
   color: var(--text-primary);
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   overflow-x: hidden;
@@ -86,11 +96,22 @@ body {
     0 10px 35px -5px rgba(4, 12, 32, 0.38),
     inset 0 1px 1px 0 var(--glass-highlight),
     inset 0 -1px 1px 0 rgba(255, 255, 255, 0.05);
+  transform: translateZ(0);
+  will-change: transform, opacity;
   transition:
     transform 0.32s cubic-bezier(0.22, 1, 0.36, 1),
     border-color 0.32s ease,
     box-shadow 0.32s ease,
     background-color 0.32s ease;
+}
+
+.liquid-glass-interactive {
+  transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.2s ease;
+  will-change: transform;
+}
+
+.liquid-glass-interactive:active {
+  transform: scale(0.97) translateZ(0);
 }
 
 .liquid-glass-interactive:hover {
