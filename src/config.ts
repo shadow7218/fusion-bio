@@ -110,9 +110,9 @@ export const siteConfig: SiteConfig = {
     },
     {
       platform: 'github',
-      url: 'https://github.com/username',
+      url: 'https://github.com/shadow7218',
       label: 'GitHub',
-      username: 'github.com/fusion',
+      username: 'github.com/shadow7218',
     },
     {
       platform: 'discord',
