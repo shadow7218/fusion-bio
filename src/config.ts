@@ -115,12 +115,6 @@ export const siteConfig: SiteConfig = {
       username: 'github.com/fusion',
     },
     {
-      platform: 'x',
-      url: 'https://x.com/username',
-      label: 'X / Twitter',
-      username: '@fusion_dev',
-    },
-    {
       platform: 'discord',
       url: 'https://discord.gg/invite',
       label: 'Discord Community',
