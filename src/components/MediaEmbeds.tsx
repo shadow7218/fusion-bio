@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { SiteConfig } from '@/config';
-import { Youtube, Music, Mail, ArrowRight } from 'lucide-react';
+import { Sparkles, Music, Mail, ArrowRight, ChevronLeft, ChevronRight, ExternalLink } from 'lucide-react';
 
 interface MediaEmbedsProps {
   embeds: SiteConfig['embeds'];
@@ -11,6 +11,21 @@ interface MediaEmbedsProps {
 
 export default function MediaEmbeds({ embeds, onNotifySuccess }: MediaEmbedsProps) {
   const [email, setEmail] = useState('');
+  const [activeImgIndex, setActiveImgIndex] = useState(0);
+
+  const gallery = embeds.wallpaperGallery;
+
+  const handleNext = () => {
+    if (gallery && gallery.images && gallery.images.length > 0) {
+      setActiveImgIndex((prev) => (prev + 1) % gallery.images.length);
+    }
+  };
+
+  const handlePrev = () => {
+    if (gallery && gallery.images && gallery.images.length > 0) {
+      setActiveImgIndex((prev) => (prev - 1 + gallery.images.length) % gallery.images.length);
+    }
+  };
 
   const handleNewsletterSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -21,22 +36,64 @@ export default function MediaEmbeds({ embeds, onNotifySuccess }: MediaEmbedsProp
 
   return (
     <div className="flex flex-col gap-5">
-      {/* 1. YouTube Showcase */}
-      {embeds.youtube.enabled && (
-        <section className="liquid-glass rounded-3xl p-4 sm:p-5 flex flex-col gap-3">
+      {/* 1. Wallpaper Gallery Showcase Carousel */}
+      {gallery && gallery.enabled && (
+        <section className="liquid-glass rounded-3xl p-4 sm:p-5 flex flex-col gap-3.5 relative overflow-hidden">
           <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-sky-300">
-            <Youtube className="w-4 h-4 text-rose-500" />
-            <span>{embeds.youtube.title}</span>
+            <Sparkles className="w-4 h-4 text-sky-400" />
+            <span>Featured Showcase — {gallery.title}</span>
           </div>
-          <div className="relative w-full overflow-hidden rounded-2xl aspect-video bg-black/40 border border-white/10">
-            <iframe
-              src={`https://www.youtube.com/embed/${embeds.youtube.videoId}`}
-              title={embeds.youtube.title}
-              loading="lazy"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-              className="absolute inset-0 w-full h-full"
-            />
+
+          <div className="relative w-full overflow-hidden rounded-2xl aspect-[16/9] bg-black/40 border border-white/10 group">
+            {gallery.images && gallery.images.length > 0 && (
+              <img
+                src={gallery.images[activeImgIndex]}
+                alt="Wallpaper preview"
+                className="w-full h-full object-cover transition-transform duration-500"
+              />
+            )}
+            <div className="absolute inset-0 bg-gradient-to-t from-[#071638]/80 via-transparent to-transparent" />
+
+            <button
+              onClick={handlePrev}
+              aria-label="Previous wallpaper"
+              className="absolute left-3 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full glass-pill flex items-center justify-center opacity-80 hover:opacity-100 active:scale-95"
+            >
+              <ChevronLeft className="w-4 h-4 text-white" />
+            </button>
+            <button
+              onClick={handleNext}
+              aria-label="Next wallpaper"
+              className="absolute right-3 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full glass-pill flex items-center justify-center opacity-80 hover:opacity-100 active:scale-95"
+            >
+              <ChevronRight className="w-4 h-4 text-white" />
+            </button>
+          </div>
+
+          <div className="flex items-center justify-between gap-2 pt-1">
+            <div className="flex flex-col min-w-0">
+              <h3 className="text-xs sm:text-sm font-bold truncate text-sky-200">
+                {gallery.title}
+              </h3>
+              <p className="text-[11px] opacity-75 truncate">
+                {gallery.subtitle}
+              </p>
+            </div>
+
+            <div className="flex items-center gap-3 shrink-0">
+              <span className="text-xs font-semibold opacity-80">
+                {activeImgIndex + 1}/{gallery.images?.length || 1}
+              </span>
+              <a
+                href={gallery.viewAllUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-3.5 py-2 rounded-xl bg-sky-400 hover:bg-sky-300 text-[#071638] font-bold text-xs flex items-center gap-1.5 shadow-lg active:scale-95 transition"
+              >
+                <span>View All</span>
+                <ExternalLink className="w-3.5 h-3.5" />
+              </a>
+            </div>
           </div>
         </section>
       )}
