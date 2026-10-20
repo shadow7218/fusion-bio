@@ -115,12 +115,6 @@ export const siteConfig: SiteConfig = {
       username: 'github.com/fusion',
     },
     {
-      platform: 'youtube',
-      url: 'https://youtube.com/@username',
-      label: 'YouTube',
-      username: '@FusionVisuals',
-    },
-    {
       platform: 'x',
       url: 'https://x.com/username',
       label: 'X / Twitter',
