@@ -193,10 +193,17 @@ export const siteConfig: SiteConfig = {
   ],
 
   embeds: {
-    youtube: {
+    wallpaperGallery: {
       enabled: true,
-      title: 'Featured Showcase — Visual Design Workflow',
-      videoId: 'jfKfPfyJRdk', // Lofi Girl stream placeholder — replace with your YouTube Video ID
+      title: 'Aesthetic Wallpapers Collection',
+      subtitle: '5 wallpapers • 4K | Anime | Nature | Dark',
+      viewAllUrl: 'https://t.me/your-channel-or-google-drive-link', // Put your Telegram or Google Drive link here
+      images: [
+        '/wall1.jpg',
+        '/wall2.jpg',
+        '/wall3.jpg',
+        '/wall4.jpg',
+      ],
     },
     spotify: {
       enabled: true,
