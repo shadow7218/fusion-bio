@@ -126,12 +126,12 @@ export const siteConfig: SiteConfig = {
 
   links: [
     {
-      id: 'fusion-wallpapers-hub',
-      title: 'Fusion Wallpapers — Official Web Platform',
-      subtitle: 'Browse & download uncompressed 4K anime and minimalist lockscreens',
-      url: 'https://github.com/username',
-      category: 'Featured',
-      icon: 'Sparkles',
+      id: 'fusion-wallpapers',
+      title: '4k Wallpapers — Official Telegram',
+      subtitle: '4K anime and minimalist lockscreens',
+      url: 'https://t.me/fusionwallvibe',
+      category: 'wallpapers',
+      icon: 'Telegram',
       badge: 'NEW DROP',
       featured: true,
     },
