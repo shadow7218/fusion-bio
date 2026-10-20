@@ -115,10 +115,10 @@ export const siteConfig: SiteConfig = {
       username: 'github.com/shadow7218',
     },
     {
-      platform: 'discord',
-      url: 'https://discord.gg/invite',
-      label: 'Discord Community',
-      username: 'Fusion Hub',
+      platform: 'pinterest',
+      url: 'https://pin.it/55ZLpAlDP',
+      label: 'Pinterest',
+      username: '@fusion',
     },
   ],
 
