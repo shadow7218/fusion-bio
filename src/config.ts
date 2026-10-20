@@ -217,7 +217,7 @@ export const siteConfig: SiteConfig = {
       enabled: true,
       title: 'Join the Inner Circle',
       description: 'Get notified whenever a new 4K wallpaper pack or open-source web tool drops. Zero spam.',
-      placeholder: 'fusionwallpaperr@gmail.com',
+      placeholder: 'Enter Your e-mail....',
       buttonText: 'Notify Me',
       formActionUrl: 'https://api.web3forms.com/submit',
     },
