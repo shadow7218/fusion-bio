@@ -211,13 +211,13 @@ export const siteConfig: SiteConfig = {
     spotify: {
       enabled: true,
       title: 'Late Night Design Session Vibe',
-      embedUrl: 'https://open.spotify.com/embed/playlist/37i9dQZF1DX8Uebhn9wzrS?utm_source=generator&theme=0',
+      embedUrl: 'https://open.spotify.com/embed/playlist/5uEJO8oVLmPkMRda3gi9X4?theme=0',
     },
     newsletter: {
       enabled: true,
       title: 'Join the Inner Circle',
       description: 'Get notified whenever a new 4K wallpaper pack or open-source web tool drops. Zero spam.',
-      placeholder: 'Enter your email address...',
+      placeholder: 'fusionwallpaperr@gmail.com',
       buttonText: 'Notify Me',
       formActionUrl: 'https://api.web3forms.com/submit',
     },
