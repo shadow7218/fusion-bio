@@ -10,7 +10,7 @@ export interface LinkItem {
 }
 
 export interface SocialItem {
-  platform: 'instagram' | 'x' | 'github' | 'youtube' | 'telegram' | 'discord' | 'threads' | 'linkedin' | 'tiktok';
+  platform: 'instagram' | 'x' | 'github' | 'youtube' | 'telegram' | 'discord' | 'threads' | 'linkedin' | 'tiktok' | 'pinterest';
   url: string;
   label: string;
   username: string;
