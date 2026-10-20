@@ -32,9 +32,9 @@ export default function LinkCard({
   onLinkClick,
   onCopyLink,
 }: LinkCardProps) {
-    const renderIcon = (iconName: string) => {
+      const renderIcon = (iconName: string) => {
     if (iconName.startsWith('/') || iconName.startsWith('http') || iconName.startsWith('./')) {
-      return <img src={iconName} alt="" className="w-6 h-6 object-contain rounded-md" />;
+      return <img src={iconName} alt="" className="w-full h-full object-cover rounded-xl" />;
     }
 
     switch (iconName) {
