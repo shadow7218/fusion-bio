@@ -36,7 +36,7 @@ export default function ProfileHeader({
       )}
 
       {/* Content wrapper with negative top margin so the avatar overlaps the bottom of the banner */}
-      <div className={`w-full p-6 sm:p-7 flex flex-col items-center text-center ${profile.banner ? '-mt-12 sm:-mt-14 relative z-10' : ''}`}>
+      <div className={`w-full p-6 sm:p-7 flex flex-col items-center text-center ${profile.banner ? '-mt-16 sm:-mt-20 relative z-10' : ''}`}>
         
         {/* Avatar Container */}
         <div className="relative group mb-4">
