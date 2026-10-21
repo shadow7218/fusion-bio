@@ -38,13 +38,9 @@ export default function ProfileHeader({
       {/* Content wrapper with negative top margin so the avatar overlaps the bottom of the banner */}
       <div className={`w-full p-6 sm:p-7 flex flex-col items-center text-center ${profile.banner ? '-mt-16 sm:-mt-20 relative z-10' : ''}`}>
         
-        {/* Avatar Container */}
+        {/* Avatar Container (Glowing light removed) */}
         <div className="relative group mb-4">
-          <div
-            aria-hidden="true"
-            className="absolute -inset-1.5 rounded-full bg-gradient-to-tr from-sky-400 via-blue-600 to-cyan-300 opacity-75 blur-md group-hover:opacity-100 transition duration-500"
-          />
-          <div className="relative w-24 h-24 sm:w-28 sm:h-28 rounded-full p-1 liquid-glass overflow-hidden bg-[#071638]">
+          <div className="relative w-24 h-24 sm:w-28 sm:h-28 rounded-full p-1 border border-white/15 overflow-hidden bg-[#071638] shadow-lg">
             <img
               src={profile.avatar}
               alt={profile.name}
