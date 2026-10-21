@@ -173,7 +173,7 @@ export const siteConfig: SiteConfig = {
       subtitle: 'High-contrast silver & electric blue automotive graphic design series',
       url: 'https://instagram.com/username',
       category: 'Wallpapers',
-      icon: 'Image',
+      icon: '/IMG_8b606b57-919d-4402-909c-b1c0d05501e0.png',
     },
     {
       id: 'mobile-dev-workflow',
