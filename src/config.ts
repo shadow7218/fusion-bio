@@ -158,7 +158,7 @@ export const siteConfig: SiteConfig = {
       icon: '/20261021_071133.png',
     },
     {
-      id: 'Threads-pc-phone-wallpapers',
+      id: 'threads-pc-phone-wallpapers',
       title: 'Threads',
       subtitle: 'Browse pc & phone wallpapes. Unlimited',
       url: 'https://www.threads.com/@fusionwallpaper',
