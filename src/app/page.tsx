@@ -10,7 +10,7 @@ import MediaEmbeds from '@/components/MediaEmbeds';
 import ContactForm from '@/components/ContactForm';
 import AnalyticsModal from '@/components/AnalyticsModal';
 import ShareModal from '@/components/ShareModal';
-import { BarChart3, Share2, CheckCircle2, Sparkles } from 'lucide-react';
+import { BarChart3, Share2, CheckCircle2, Sparkles, Sun, Moon } from 'lucide-react';
 import { AnimatePresence, motion } from 'framer-motion';
 
 export default function HomePage() {
@@ -19,28 +19,48 @@ export default function HomePage() {
   const [clicksMap, setClicksMap] = useState<Record<string, number>>({});
   const [toastMessage, setToastMessage] = useState<string | null>(null);
 
-  // Modals state (Theme customizer removed)
+  // Default to Dark Mode
+  const [themeMode, setThemeMode] = useState<'dark' | 'light'>('dark');
+
+  // Modals state
   const [isShareOpen, setIsShareOpen] = useState(false);
   const [isAnalyticsOpen, setIsAnalyticsOpen] = useState(false);
 
-  // Load saved local click analytics on mount
+  // Load saved local click analytics & theme mode on mount
   useEffect(() => {
     try {
       const storedClicks = localStorage.getItem('fusion_link_clicks');
       if (storedClicks) {
         setClicksMap(JSON.parse(storedClicks));
       }
+      const savedTheme = localStorage.getItem('fusion_theme_mode') as 'dark' | 'light' | null;
+      if (savedTheme === 'light' || savedTheme === 'dark') {
+        setThemeMode(savedTheme);
+      }
     } catch {}
   }, []);
 
-  // Lock default dark theme permanently on HTML root
+  // Apply Dark/Light theme and keep glass settings locked
   useEffect(() => {
     const root = document.documentElement;
-    root.classList.add('dark');
-    root.classList.remove('light');
+    if (themeMode === 'light') {
+      root.classList.add('light');
+      root.classList.remove('dark');
+    } else {
+      root.classList.add('dark');
+      root.classList.remove('light');
+    }
     root.setAttribute('data-accent', siteConfig.theme.defaultAccent);
     root.setAttribute('data-blur', siteConfig.theme.defaultBlur);
-  }, []);
+
+    try {
+      localStorage.setItem('fusion_theme_mode', themeMode);
+    } catch {}
+  }, [themeMode]);
+
+  const toggleTheme = () => {
+    setThemeMode((prev) => (prev === 'dark' ? 'light' : 'dark'));
+  };
 
   const triggerToast = (msg: string) => {
     setToastMessage(msg);
@@ -82,17 +102,38 @@ export default function HomePage() {
   return (
     <div className="relative min-h-screen w-full overflow-hidden pb-20 pt-6 px-4 sm:px-6 flex flex-col items-center">
       {/* =================================================================
-          FLOATING TOP UTILITY BAR (Avatar and Name pill on left)
+          FLOATING TOP UTILITY BAR (Pill Toggle Switch on Left)
           ================================================================= */}
       <header className="w-full max-w-xl flex items-center justify-between mb-6 z-20">
-        <div className="glass-pill flex items-center gap-2 px-2.5 py-1.5 rounded-full text-xs font-semibold tracking-wide">
-          <img
-            src={siteConfig.profile.avatar}
-            alt={siteConfig.profile.name}
-            className="w-6 h-6 rounded-full object-cover border border-sky-400/40"
-          />
-          <span className="pr-1 text-sky-100">{siteConfig.profile.name}</span>
-        </div>
+        {/* Sliding Dark/Light Pill Switch */}
+        <button
+          type="button"
+          role="switch"
+          aria-checked={themeMode === 'light'}
+          aria-label="Toggle Dark or Light Mode"
+          onClick={toggleTheme}
+          className={`relative w-16 h-8 rounded-full p-1 transition-colors duration-300 flex items-center shadow-md border ${
+            themeMode === 'dark'
+              ? 'bg-[#2b2d31] border-white/15'
+              : 'bg-white border-slate-300 shadow-slate-300/60'
+          }`}
+        >
+          <motion.div
+            layout
+            transition={{ type: 'spring', stiffness: 500, damping: 32 }}
+            className={`w-6 h-6 rounded-full flex items-center justify-center shadow-sm ${
+              themeMode === 'dark'
+                ? 'bg-white text-slate-900 translate-x-0'
+                : 'bg-[#071638] text-white ml-auto'
+            }`}
+          >
+            {themeMode === 'dark' ? (
+              <Sun className="w-3.5 h-3.5 stroke-[2.4]" />
+            ) : (
+              <Moon className="w-3.5 h-3.5 fill-current" />
+            )}
+          </motion.div>
+        </button>
 
         <div className="flex items-center gap-2">
           <button
@@ -100,7 +141,7 @@ export default function HomePage() {
             aria-label="Open Local Click Analytics"
             className="glass-pill flex items-center gap-1.5 px-3.5 py-2 rounded-full text-xs font-medium active:scale-95"
           >
-            <BarChart3 className="w-3.5 h-3.5 text-sky-400" />
+            <BarChart3 className="w-3.5 h-3.5 text-sky-500 dark:text-sky-400" />
             <span>Stats</span>
           </button>
 
@@ -109,7 +150,7 @@ export default function HomePage() {
             aria-label="Share Profile and QR Code"
             className="glass-pill flex items-center gap-1.5 px-3.5 py-2 rounded-full text-xs font-medium active:scale-95"
           >
-            <Share2 className="w-3.5 h-3.5 text-sky-400" />
+            <Share2 className="w-3.5 h-3.5 text-sky-500 dark:text-sky-400" />
             <span>Share</span>
           </button>
         </div>
@@ -173,7 +214,7 @@ export default function HomePage() {
                     setSearchQuery('');
                     setActiveCategory('All');
                   }}
-                  className="mt-3 text-xs font-semibold text-sky-400 underline underline-offset-4"
+                  className="mt-3 text-xs font-semibold text-sky-500 dark:text-sky-400 underline underline-offset-4"
                 >
                   Reset filters
                 </button>
@@ -200,9 +241,9 @@ export default function HomePage() {
       {/* =================================================================
           FOOTER
           ================================================================= */}
-      <footer className="mt-14 text-center text-xs opacity-60 flex flex-col items-center gap-1.5">
+      <footer className="mt-14 text-center text-xs opacity-70 flex flex-col items-center gap-1.5">
         <div className="flex items-center gap-1.5 font-medium">
-          <Sparkles className="w-3.5 h-3.5 text-sky-400" />
+          <Sparkles className="w-3.5 h-3.5 text-sky-500 dark:text-sky-400" />
           <span>{siteConfig.profile.name} • Liquid Glass Edition</span>
         </div>
         <p>Built & deployed 100% from Android</p>
@@ -220,7 +261,7 @@ export default function HomePage() {
             role="status"
             className="fixed bottom-6 z-50 liquid-glass px-4 py-2.5 rounded-full flex items-center gap-2 text-xs font-semibold shadow-2xl border border-sky-400/40"
           >
-            <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
+            <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0" />
             <span>{toastMessage}</span>
           </motion.div>
         )}
