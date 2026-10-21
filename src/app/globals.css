@@ -10,11 +10,11 @@
   --accent-glow: #38bdf8;
   
   /* Ultra-clear, deep smoky dark glass matching your reference */
-  --glass-alpha: 0.62;
+  --glass-alpha: 0.32;
   --glass-bg: rgba(11, 17, 30, var(--glass-alpha));
   --glass-border: rgba(244, 254, 255, 0.18);
   --glass-highlight: rgba(244, 254, 255, 0.35);
-  --glass-blur: 6px;
+  --glass-blur: 4px;
 }
 
 html.light {
