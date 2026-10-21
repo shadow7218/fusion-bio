@@ -25,22 +25,22 @@ export default function ProfileHeader({
     >
       {/* Custom Header Banner Image */}
       {profile.banner && (
-        <div className="w-full h-32 sm:h-36 overflow-hidden relative border-b border-white/10">
+        <div className="w-full h-32 sm:h-36 overflow-hidden relative border-b border-black/10 dark:border-white/10">
           <img
             src={profile.banner}
             alt="Profile Banner"
             className="w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#071638]/20 to-[#071638]/80" />
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/35 dark:to-[#071638]/80" />
         </div>
       )}
 
       {/* Content wrapper with negative top margin so the avatar overlaps the bottom of the banner */}
       <div className={`w-full p-6 sm:p-7 flex flex-col items-center text-center ${profile.banner ? '-mt-16 sm:-mt-20 relative z-10' : ''}`}>
         
-        {/* Avatar Container (Glowing light removed) */}
+        {/* Avatar Container (No outer glow ring, adapts cleanly to Light & Dark) */}
         <div className="relative group mb-4">
-          <div className="relative w-24 h-24 sm:w-28 sm:h-28 rounded-full p-1 border border-white/15 overflow-hidden bg-[#071638] shadow-lg">
+          <div className="relative w-24 h-24 sm:w-28 sm:h-28 rounded-full p-1 border border-slate-300 dark:border-white/15 overflow-hidden bg-white dark:bg-[#071638] shadow-lg">
             <img
               src={profile.avatar}
               alt={profile.name}
@@ -53,7 +53,7 @@ export default function ProfileHeader({
             className="absolute bottom-1.5 right-1.5 flex h-4 w-4 items-center justify-center"
           >
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-            <span className="relative inline-flex rounded-full h-3 w-3 bg-emerald-500 border-2 border-[#071638]" />
+            <span className="relative inline-flex rounded-full h-3 w-3 bg-emerald-500 border-2 border-white dark:border-[#071638]" />
           </span>
         </div>
 
@@ -64,18 +64,18 @@ export default function ProfileHeader({
           </h1>
           {profile.verified && (
             <BadgeCheck
-              className="w-6 h-6 text-sky-400 fill-sky-400/20 shrink-0"
+              className="w-6 h-6 text-sky-500 dark:text-sky-400 fill-sky-400/20 shrink-0"
               aria-label="Verified Creator"
             />
           )}
         </div>
 
         {/* Handle & Location */}
-        <div className="flex items-center gap-2 text-xs opacity-75 mt-1 font-medium">
+        <div className="flex items-center gap-2 text-xs opacity-80 mt-1 font-medium">
           <span>{profile.handle}</span>
           <span>•</span>
           <span className="flex items-center gap-0.5">
-            <MapPin className="w-3 h-3 text-sky-400" />
+            <MapPin className="w-3 h-3 text-sky-500 dark:text-sky-400" />
             {profile.location}
           </span>
         </div>
@@ -86,14 +86,14 @@ export default function ProfileHeader({
         </p>
 
         {/* Bio */}
-        <p className="mt-2 text-xs sm:text-sm opacity-80 max-w-md leading-relaxed">
+        <p className="mt-2 text-xs sm:text-sm opacity-85 max-w-md leading-relaxed">
           {profile.bio}
         </p>
 
         {/* Status Pill + Quick Actions */}
         <div className="mt-5 flex flex-wrap items-center justify-center gap-2 w-full">
           <div className="glass-pill px-3.5 py-1.5 rounded-full text-[11px] font-medium flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-sky-400 animate-pulse" />
+            <span className="w-2 h-2 rounded-full bg-sky-500 dark:bg-sky-400 animate-pulse" />
             <span>{profile.statusText}</span>
           </div>
 
@@ -102,7 +102,7 @@ export default function ProfileHeader({
             className="glass-pill px-3 py-1.5 rounded-full text-[11px] font-medium flex items-center gap-1.5 active:scale-95"
             title="Copy page URL"
           >
-            <Copy className="w-3 h-3 text-sky-400" />
+            <Copy className="w-3 h-3 text-sky-500 dark:text-sky-400" />
             <span>Copy URL</span>
           </button>
 
@@ -111,7 +111,7 @@ export default function ProfileHeader({
             className="glass-pill px-3 py-1.5 rounded-full text-[11px] font-medium flex items-center gap-1.5 active:scale-95"
             title="Show QR Code"
           >
-            <QrCode className="w-3 h-3 text-sky-400" />
+            <QrCode className="w-3 h-3 text-sky-500 dark:text-sky-400" />
             <span>QR Code</span>
           </button>
         </div>
