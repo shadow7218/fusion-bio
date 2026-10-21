@@ -5,25 +5,25 @@
 :root {
   --bg-primary: #060913;
   --bg-secondary: #0E2F76;
-  --text-primary: #F4FEFF;        /* Crisp Ice White */
-  --text-secondary: #A9C0E0;      /* Powder Blue for clean subtitles */
+  --text-primary: #F4FEFF;
+  --text-secondary: #A9C0E0;
   --accent-rgb: 56, 189, 248;
   --accent-glow: #38bdf8;
-  /* Dark, sleek smoky frosted glass like your reference UI */
-  --glass-bg: rgba(16, 22, 36, 0.68);
-  --glass-border: rgba(244, 254, 255, 0.16);
-  --glass-highlight: rgba(244, 254, 255, 0.28);
-  --glass-blur: 24px;
+  --glass-alpha: 0.58;
+  --glass-bg: rgba(14, 23, 42, var(--glass-alpha));
+  --glass-border: rgba(244, 254, 255, 0.22);
+  --glass-highlight: rgba(244, 254, 255, 0.38);
+  --glass-blur: 18px;
 }
 
-/* Polished Light Mode ("Ice Daylight") with fixed high-contrast text */
+/* Polished Ice Daylight Mode */
 html.light {
-  --bg-primary: #eef6ff;
-  --bg-secondary: #dbeafe;
+  --bg-primary: #e8f3fe;
+  --bg-secondary: #d4e8fc;
   --text-primary: #071638;
   --text-secondary: #1e3a8a;
-  --glass-bg: rgba(255, 255, 255, 0.78);
-  --glass-border: rgba(14, 47, 118, 0.16);
+  --glass-bg: rgba(235, 245, 255, var(--glass-alpha));
+  --glass-border: rgba(255, 255, 255, 0.85);
   --glass-highlight: rgba(255, 255, 255, 0.95);
 }
 
@@ -34,9 +34,11 @@ html.light {
 [data-accent="emerald"] { --accent-rgb: 16, 185, 129; --accent-glow: #10b981; }
 [data-accent="rose"] { --accent-rgb: 244, 63, 94; --accent-glow: #f43f5e; }
 
-[data-blur="sm"] { --glass-blur: 10px; }
-[data-blur="md"] { --glass-blur: 22px; }
-[data-blur="lg"] { --glass-blur: 32px; }
+/* Toggleable Edge Highlights */
+html[data-edge="off"] {
+  --glass-border: rgba(244, 254, 255, 0.06);
+  --glass-highlight: transparent;
+}
 
 html {
   scroll-behavior: smooth;
@@ -54,7 +56,7 @@ body {
   background-color: var(--bg-primary);
   background-image: 
     radial-gradient(circle at 12% 15%, rgba(14, 47, 118, 0.75) 0%, transparent 45%),
-    radial-gradient(circle at 88% 45%, rgba(56, 189, 248, 0.22) 0%, transparent 50%),
+    radial-gradient(circle at 88% 45%, rgba(var(--accent-rgb), 0.22) 0%, transparent 50%),
     radial-gradient(circle at 50% 90%, rgba(14, 47, 118, 0.65) 0%, transparent 55%),
     linear-gradient(135deg, #071638 0%, #050b1a 50%, #02050d 100%);
   background-attachment: fixed;
@@ -65,18 +67,18 @@ body {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* Clean Ice-Blue Gradient Background (Light Mode) */
+/* Clean Ice-Daylight Gradient Background (Light Mode) */
 html.light body {
-  background-color: #eef6ff;
+  background-color: #e8f3fe;
   background-image: 
-    radial-gradient(circle at 15% 15%, rgba(56, 189, 248, 0.25) 0%, transparent 45%),
-    radial-gradient(circle at 85% 80%, rgba(14, 47, 118, 0.12) 0%, transparent 50%),
-    linear-gradient(135deg, #f4feff 0%, #e0f2fe 50%, #dbeafe 100%);
+    radial-gradient(circle at 15% 15%, rgba(56, 189, 248, 0.3) 0%, transparent 45%),
+    radial-gradient(circle at 85% 80%, rgba(14, 47, 118, 0.15) 0%, transparent 50%),
+    linear-gradient(135deg, #f4feff 0%, #e0f2fe 50%, #cde4fa 100%);
   color: #071638;
 }
 
 /* ==========================================================================
-   SLEEK FROSTED GLASS UI ENGINE (Zero Lag + Deep Shadows)
+   LIQUID GLASS UI ENGINE
    ========================================================================== */
 
 .liquid-glass {
@@ -86,9 +88,9 @@ html.light body {
   -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(190%);
   border: 1px solid var(--glass-border);
   box-shadow:
-    0 18px 40px -8px rgba(0, 0, 0, 0.65),
-    0 4px 12px -2px rgba(0, 0, 0, 0.35),
-    inset 0 1px 1px 0 var(--glass-highlight);
+    0 18px 40px -8px rgba(0, 0, 0, 0.6),
+    0 4px 12px -2px rgba(0, 0, 0, 0.3),
+    inset 0 1.5px 2px 0 var(--glass-highlight);
   transform: translateZ(0);
   will-change: transform;
   transition:
@@ -100,9 +102,9 @@ html.light body {
 
 html.light .liquid-glass {
   box-shadow:
-    0 14px 32px -6px rgba(14, 47, 118, 0.12),
-    0 4px 10px -2px rgba(14, 47, 118, 0.06),
-    inset 0 1px 1.5px 0 var(--glass-highlight);
+    0 14px 35px -6px rgba(14, 47, 118, 0.15),
+    0 4px 12px -2px rgba(14, 47, 118, 0.08),
+    inset 0 2px 3px 0 var(--glass-highlight);
 }
 
 .liquid-glass-interactive {
@@ -115,13 +117,13 @@ html.light .liquid-glass {
 }
 
 .liquid-glass-interactive:hover {
-  border-color: rgba(var(--accent-rgb), 0.55);
+  border-color: rgba(var(--accent-rgb), 0.6);
   box-shadow:
-    0 20px 42px -8px rgba(var(--accent-rgb), 0.25),
-    inset 0 1px 1.5px 0 var(--glass-highlight);
+    0 20px 42px -8px rgba(var(--accent-rgb), 0.28),
+    inset 0 1.5px 2px 0 var(--glass-highlight);
 }
 
-/* Specular diagonal sheen on hover */
+/* Specular diagonal sheen on hover (controlled by Dynamic Reflections switch) */
 .liquid-sheen {
   position: relative;
   overflow: hidden;
@@ -137,12 +139,16 @@ html.light .liquid-glass {
   background: linear-gradient(
     90deg,
     transparent,
-    rgba(244, 254, 255, 0.14),
+    rgba(244, 254, 255, 0.18),
     transparent
   );
   transform: skewX(-25deg);
   transition: left 0.65s cubic-bezier(0.22, 1, 0.36, 1);
   pointer-events: none;
+}
+
+html[data-reflections="off"] .liquid-sheen::before {
+  display: none;
 }
 
 .liquid-sheen:hover::before,
@@ -152,23 +158,49 @@ html.light .liquid-glass {
 
 /* Glass Pill Button */
 .glass-pill {
-  background: rgba(244, 254, 255, 0.08);
+  background: rgba(244, 254, 255, 0.09);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
   border: 1px solid var(--glass-border);
-  box-shadow: inset 0 1px 0 0 var(--glass-highlight);
+  box-shadow: inset 0 1px 1px 0 var(--glass-highlight);
   transition: all 0.2s ease;
 }
 
 html.light .glass-pill {
-  background: rgba(14, 47, 118, 0.07);
-  border-color: rgba(14, 47, 118, 0.18);
+  background: rgba(255, 255, 255, 0.65);
+  border-color: rgba(255, 255, 255, 0.9);
   color: #071638;
+  box-shadow: 0 4px 12px rgba(14, 47, 118, 0.08), inset 0 1px 2px rgba(255, 255, 255, 0.9);
 }
 
 .glass-pill:hover {
   border-color: rgba(var(--accent-rgb), 0.6);
   background: rgba(var(--accent-rgb), 0.18);
+}
+
+/* Custom Range Slider Thumb (For Liquid Glass Customizer) */
+.custom-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #ffffff;
+  box-shadow: 0 2px 8px rgba(7, 22, 56, 0.35), 0 0 0 2px rgba(41, 182, 246, 0.35);
+  cursor: pointer;
+  transition: transform 0.15s ease;
+}
+.custom-range::-webkit-slider-thumb:active {
+  transform: scale(1.12);
+}
+.custom-range::-moz-range-thumb {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 2px solid rgba(41, 182, 246, 0.35);
+  box-shadow: 0 2px 8px rgba(7, 22, 56, 0.35);
+  cursor: pointer;
 }
 
 /* Custom Scrollbar */
