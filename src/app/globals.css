@@ -10,7 +10,7 @@
   --accent-glow: #38bdf8;
 
   /* Default Dark Mode: 90% Transparency + 4px Blur Strength */
-  --glass-alpha: 0.32;
+  --glass-alpha: 0.44;
   --glass-blur: 6px;
   --glass-bg: rgba(7, 13, 26, var(--glass-alpha));
   --glass-border: rgba(244, 254, 255, 0.16);
