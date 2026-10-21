@@ -82,9 +82,18 @@ export default function HomePage() {
   return (
     <div className="relative min-h-screen w-full overflow-hidden pb-20 pt-6 px-4 sm:px-6 flex flex-col items-center">
       {/* =================================================================
-          FLOATING TOP UTILITY BAR (Glass UI button removed)
+          FLOATING TOP UTILITY BAR (Avatar and Name pill on left)
           ================================================================= */}
-      <header className="w-full max-w-xl flex items-center justify-end mb-6 z-20">
+      <header className="w-full max-w-xl flex items-center justify-between mb-6 z-20">
+        <div className="glass-pill flex items-center gap-2 px-2.5 py-1.5 rounded-full text-xs font-semibold tracking-wide">
+          <img
+            src={siteConfig.profile.avatar}
+            alt={siteConfig.profile.name}
+            className="w-6 h-6 rounded-full object-cover border border-sky-400/40"
+          />
+          <span className="pr-1 text-sky-100">{siteConfig.profile.name}</span>
+        </div>
+
         <div className="flex items-center gap-2">
           <button
             onClick={() => setIsAnalyticsOpen(true)}
