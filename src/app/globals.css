@@ -57,7 +57,7 @@ body {
   /* Replace '/bg-wallpaper.jpg' with the exact filename of your image in public/ */
   background-image: 
     linear-gradient(to bottom, rgba(7, 13, 26, 0.65), rgba(4, 8, 16, 0.88)),
-    url('/bg-wallpaper.jpg');
+    url('/Levi Ackerman By @fusionwallvibe (2).jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
