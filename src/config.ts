@@ -3,7 +3,7 @@ export interface LinkItem {
   title: string;
   subtitle: string;
   url: string;
-  category: 'Featured' | 'Projects' | 'Wallpapers' | 'Resources';
+  category: 'Featured' | 'Projects' | 'Wallpapers' | 'Resources' | 'Social';
   icon: string;
   badge?: string;
   featured?: boolean;
