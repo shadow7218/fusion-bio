@@ -34,7 +34,7 @@ export interface SiteConfig {
     defaultBlur: 'sm' | 'md' | 'lg';
   };
   socials: SocialItem[];
-  categories: ('All' | 'Featured' | 'Projects' | 'Wallpapers' | 'Resources')[];
+  categories: ('All' | 'Featured' | 'Projects' | 'Wallpapers' | 'Resources' | 'Social')[];
   links: LinkItem[];
   embeds: {
     wallpaperGallery?: {
