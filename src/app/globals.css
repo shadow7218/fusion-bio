@@ -5,13 +5,13 @@
 :root {
   --bg-primary: #071638;
   --bg-secondary: #0E2F76;
-  --text-primary: #F4FEFF;
-  --text-secondary: #A9C0E0;
-  --accent-rgb: 14, 47, 118;
+  --text-primary: #FFFFFF;        /* Pure white for maximum clarity */
+  --text-secondary: #38bdf8;      /* Bright sky blue for subtitles and handles */
+  --accent-rgb: 56, 189, 248;
   --accent-glow: #38bdf8;
-  --glass-bg: rgba(7, 22, 56, 0.85);
-  --glass-border: rgba(244, 254, 255, 0.16);
-  --glass-highlight: rgba(244, 254, 255, 0.28);
+  --glass-bg: rgba(7, 22, 56, 0.88);
+  --glass-border: rgba(244, 254, 255, 0.2);
+  --glass-highlight: rgba(244, 254, 255, 0.35);
   --glass-blur: 16px;
 }
 
