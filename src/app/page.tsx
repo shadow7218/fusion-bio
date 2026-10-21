@@ -109,31 +109,24 @@ export default function HomePage() {
   return (
     <div className="relative min-h-screen w-full overflow-hidden pb-20 pt-6 px-4 sm:px-6 flex flex-col items-center">
       {/* =================================================================
-          ANIMATED LIQUID AURORA MESH BACKGROUND
+          ULTRA-CLEAN, ZERO-LAG ADAPTIVE GRADIENT BACKGROUND
           ================================================================= */}
       <div
         aria-hidden="true"
-        className="pointer-events-none fixed inset-0 -z-10 overflow-hidden"
+        className="pointer-events-none fixed inset-0 -z-10 overflow-hidden transition-colors duration-500"
       >
+        {/* Dynamic top-left accent ambient glow */}
         <div
-          className="absolute -top-[15%] -left-[10%] h-[380px] w-[380px] sm:h-[520px] sm:w-[520px] rounded-full blur-[110px] opacity-55 animate-aurora-1"
-          style={{ background: 'radial-gradient(circle, var(--accent-glow), #0E2F76)' }}
-        />
-        <div
-          className="absolute top-[35%] -right-[15%] h-[360px] w-[360px] sm:h-[480px] sm:w-[480px] rounded-full blur-[120px] opacity-40 animate-aurora-2"
-          style={{ background: 'radial-gradient(circle, #38bdf8, #1e3a8a)' }}
-        />
-        <div
-          className="absolute -bottom-[15%] left-[15%] h-[340px] w-[340px] sm:h-[460px] sm:w-[460px] rounded-full blur-[115px] opacity-45 animate-aurora-3"
-          style={{ background: 'radial-gradient(circle, var(--accent-glow), #071638)' }}
-        />
-        {/* Subtle noise grid overlay for tactile frosted refraction */}
-        <div
-          className="absolute inset-0 opacity-[0.04]"
+          className="absolute -top-[10%] -left-[10%] h-[340px] w-[340px] sm:h-[460px] sm:w-[460px] rounded-full opacity-25 dark:opacity-30 transition-all duration-500"
           style={{
-            backgroundImage:
-              'radial-gradient(circle at 1px 1px, rgba(255,255,255,0.8) 1px, transparent 0)',
-            backgroundSize: '24px 24px',
+            background: 'radial-gradient(circle, var(--accent-glow) 0%, transparent 70%)',
+          }}
+        />
+        {/* Dynamic bottom-right royal/sky glow */}
+        <div
+          className="absolute bottom-[5%] -right-[10%] h-[320px] w-[320px] sm:h-[440px] sm:w-[440px] rounded-full opacity-20 dark:opacity-25 transition-all duration-500"
+          style={{
+            background: 'radial-gradient(circle, rgba(var(--accent-rgb), 0.8) 0%, transparent 70%)',
           }}
         />
       </div>
@@ -239,7 +232,7 @@ export default function HomePage() {
           </AnimatePresence>
         </section>
 
-        {/* 5. Embedded Rich Media (YouTube, Spotify, Newsletter) */}
+        {/* 5. Embedded Rich Media (Wallpaper Gallery, Spotify, Newsletter) */}
         <MediaEmbeds
           embeds={siteConfig.embeds}
           onNotifySuccess={(msg) => triggerToast(msg)}
@@ -313,4 +306,4 @@ export default function HomePage() {
       />
     </div>
   );
-        }
+}
