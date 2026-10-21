@@ -3,26 +3,25 @@
 @tailwind utilities;
 
 :root {
-  --bg-primary: #060913;
-  --bg-secondary: #0E2F76;
+  --bg-primary: #070d1a;
   --text-primary: #F4FEFF;
   --text-secondary: #A9C0E0;
   --accent-rgb: 56, 189, 248;
   --accent-glow: #38bdf8;
-  --glass-alpha: 0.58;
-  --glass-bg: rgba(14, 23, 42, var(--glass-alpha));
-  --glass-border: rgba(244, 254, 255, 0.22);
-  --glass-highlight: rgba(244, 254, 255, 0.38);
-  --glass-blur: 18px;
+  
+  /* Ultra-clear, deep smoky dark glass matching your reference */
+  --glass-alpha: 0.62;
+  --glass-bg: rgba(11, 17, 30, var(--glass-alpha));
+  --glass-border: rgba(244, 254, 255, 0.18);
+  --glass-highlight: rgba(244, 254, 255, 0.35);
+  --glass-blur: 24px;
 }
 
-/* Polished Ice Daylight Mode */
 html.light {
   --bg-primary: #e8f3fe;
-  --bg-secondary: #d4e8fc;
   --text-primary: #071638;
   --text-secondary: #1e3a8a;
-  --glass-bg: rgba(235, 245, 255, var(--glass-alpha));
+  --glass-bg: rgba(240, 246, 255, var(--glass-alpha));
   --glass-border: rgba(255, 255, 255, 0.85);
   --glass-highlight: rgba(255, 255, 255, 0.95);
 }
@@ -34,9 +33,8 @@ html.light {
 [data-accent="emerald"] { --accent-rgb: 16, 185, 129; --accent-glow: #10b981; }
 [data-accent="rose"] { --accent-rgb: 244, 63, 94; --accent-glow: #f43f5e; }
 
-/* Toggleable Edge Highlights */
 html[data-edge="off"] {
-  --glass-border: rgba(244, 254, 255, 0.06);
+  --glass-border: rgba(244, 254, 255, 0.05);
   --glass-highlight: transparent;
 }
 
@@ -51,45 +49,38 @@ html {
   -webkit-tap-highlight-color: transparent;
 }
 
-/* Rich Multi-Tone Gradient Background (Dark Mode) */
+/* ==========================================================================
+   CUSTOM IMAGE BACKGROUND WITH DARK AMBIENT VIGNETTE
+   ========================================================================== */
 body {
-  background-color: var(--bg-primary);
+  background-color: #070d1a;
+  /* Replace '/bg-wallpaper.jpg' with the exact filename of your image in public/ */
   background-image: 
-    radial-gradient(circle at 12% 15%, rgba(14, 47, 118, 0.75) 0%, transparent 45%),
-    radial-gradient(circle at 88% 45%, rgba(var(--accent-rgb), 0.22) 0%, transparent 50%),
-    radial-gradient(circle at 50% 90%, rgba(14, 47, 118, 0.65) 0%, transparent 55%),
-    linear-gradient(135deg, #071638 0%, #050b1a 50%, #02050d 100%);
+    linear-gradient(to bottom, rgba(7, 13, 26, 0.65), rgba(4, 8, 16, 0.88)),
+    url('/bg-wallpaper.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   background-attachment: fixed;
   color: var(--text-primary);
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   overflow-x: hidden;
   min-height: 100vh;
-  transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-/* Clean Ice-Daylight Gradient Background (Light Mode) */
-html.light body {
-  background-color: #e8f3fe;
-  background-image: 
-    radial-gradient(circle at 15% 15%, rgba(56, 189, 248, 0.3) 0%, transparent 45%),
-    radial-gradient(circle at 85% 80%, rgba(14, 47, 118, 0.15) 0%, transparent 50%),
-    linear-gradient(135deg, #f4feff 0%, #e0f2fe 50%, #cde4fa 100%);
-  color: #071638;
 }
 
 /* ==========================================================================
-   LIQUID GLASS UI ENGINE
+   ULTRA-CLEAR FLOATING LIQUID GLASS UI
    ========================================================================== */
 
 .liquid-glass {
   position: relative;
   background: var(--glass-bg);
-  backdrop-filter: blur(var(--glass-blur)) saturate(190%);
-  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(190%);
+  backdrop-filter: blur(var(--glass-blur)) saturate(200%);
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(200%);
   border: 1px solid var(--glass-border);
   box-shadow:
-    0 18px 40px -8px rgba(0, 0, 0, 0.6),
-    0 4px 12px -2px rgba(0, 0, 0, 0.3),
+    0 20px 45px -8px rgba(2, 5, 12, 0.75),
+    0 4px 14px -2px rgba(0, 0, 0, 0.4),
     inset 0 1.5px 2px 0 var(--glass-highlight);
   transform: translateZ(0);
   will-change: transform;
@@ -98,13 +89,6 @@ html.light body {
     border-color 0.25s ease,
     box-shadow 0.25s ease,
     background-color 0.25s ease;
-}
-
-html.light .liquid-glass {
-  box-shadow:
-    0 14px 35px -6px rgba(14, 47, 118, 0.15),
-    0 4px 12px -2px rgba(14, 47, 118, 0.08),
-    inset 0 2px 3px 0 var(--glass-highlight);
 }
 
 .liquid-glass-interactive {
@@ -117,13 +101,14 @@ html.light .liquid-glass {
 }
 
 .liquid-glass-interactive:hover {
-  border-color: rgba(var(--accent-rgb), 0.6);
+  border-color: rgba(var(--accent-rgb), 0.65);
   box-shadow:
-    0 20px 42px -8px rgba(var(--accent-rgb), 0.28),
-    inset 0 1.5px 2px 0 var(--glass-highlight);
+    0 22px 48px -8px rgba(var(--accent-rgb), 0.3),
+    0 6px 16px -2px rgba(0, 0, 0, 0.5),
+    inset 0 1.5px 2.5px 0 var(--glass-highlight);
 }
 
-/* Specular diagonal sheen on hover (controlled by Dynamic Reflections switch) */
+/* Specular diagonal sheen */
 .liquid-sheen {
   position: relative;
   overflow: hidden;
@@ -139,7 +124,7 @@ html.light .liquid-glass {
   background: linear-gradient(
     90deg,
     transparent,
-    rgba(244, 254, 255, 0.18),
+    rgba(244, 254, 255, 0.2),
     transparent
   );
   transform: skewX(-25deg);
@@ -159,26 +144,19 @@ html[data-reflections="off"] .liquid-sheen::before {
 /* Glass Pill Button */
 .glass-pill {
   background: rgba(244, 254, 255, 0.09);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   border: 1px solid var(--glass-border);
   box-shadow: inset 0 1px 1px 0 var(--glass-highlight);
   transition: all 0.2s ease;
 }
 
-html.light .glass-pill {
-  background: rgba(255, 255, 255, 0.65);
-  border-color: rgba(255, 255, 255, 0.9);
-  color: #071638;
-  box-shadow: 0 4px 12px rgba(14, 47, 118, 0.08), inset 0 1px 2px rgba(255, 255, 255, 0.9);
-}
-
 .glass-pill:hover {
-  border-color: rgba(var(--accent-rgb), 0.6);
-  background: rgba(var(--accent-rgb), 0.18);
+  border-color: rgba(var(--accent-rgb), 0.65);
+  background: rgba(var(--accent-rgb), 0.2);
 }
 
-/* Custom Range Slider Thumb (For Liquid Glass Customizer) */
+/* Custom Range Slider Thumb */
 .custom-range::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
@@ -186,21 +164,12 @@ html.light .glass-pill {
   height: 22px;
   border-radius: 50%;
   background: #ffffff;
-  box-shadow: 0 2px 8px rgba(7, 22, 56, 0.35), 0 0 0 2px rgba(41, 182, 246, 0.35);
+  box-shadow: 0 2px 8px rgba(7, 22, 56, 0.4), 0 0 0 2px rgba(56, 189, 248, 0.4);
   cursor: pointer;
   transition: transform 0.15s ease;
 }
 .custom-range::-webkit-slider-thumb:active {
   transform: scale(1.12);
-}
-.custom-range::-moz-range-thumb {
-  width: 22px;
-  height: 22px;
-  border-radius: 50%;
-  background: #ffffff;
-  border: 2px solid rgba(41, 182, 246, 0.35);
-  box-shadow: 0 2px 8px rgba(7, 22, 56, 0.35);
-  cursor: pointer;
 }
 
 /* Custom Scrollbar */
