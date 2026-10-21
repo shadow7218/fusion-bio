@@ -14,7 +14,7 @@
   --glass-bg: rgba(11, 17, 30, var(--glass-alpha));
   --glass-border: rgba(244, 254, 255, 0.18);
   --glass-highlight: rgba(244, 254, 255, 0.35);
-  --glass-blur: 4px;
+  --glass-blur: 6px;
 }
 
 html.light {
