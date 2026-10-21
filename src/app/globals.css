@@ -3,26 +3,31 @@
 @tailwind utilities;
 
 :root {
-  --bg-primary: #070d1a;
+  --bg-primary: #040812;
   --text-primary: #F4FEFF;
   --text-secondary: #A9C0E0;
   --accent-rgb: 56, 189, 248;
   --accent-glow: #38bdf8;
-  
-  /* Ultra-clear, deep smoky dark glass matching your reference */
+
+  /* Default Dark Mode: 90% Transparency + 4px Blur Strength */
   --glass-alpha: 0.32;
-  --glass-bg: rgba(11, 17, 30, var(--glass-alpha));
-  --glass-border: rgba(244, 254, 255, 0.18);
-  --glass-highlight: rgba(244, 254, 255, 0.35);
   --glass-blur: 6px;
+  --glass-bg: rgba(7, 13, 26, var(--glass-alpha));
+  --glass-border: rgba(244, 254, 255, 0.16);
+  --glass-highlight: rgba(244, 254, 255, 0.28);
 }
 
+/* High-Contrast Light Mode Variables */
 html.light {
-  --bg-primary: #e8f3fe;
+  --bg-primary: #eef6ff;
   --text-primary: #071638;
   --text-secondary: #1e3a8a;
-  --glass-bg: rgba(240, 246, 255, var(--glass-alpha));
-  --glass-border: rgba(255, 255, 255, 0.85);
+  --accent-rgb: 14, 116, 144;
+  --accent-glow: #0284c7;
+
+  /* Frosted White Glass in Light Mode so Dark Navy text is 100% readable */
+  --glass-bg: rgba(255, 255, 255, 0.78);
+  --glass-border: rgba(14, 47, 118, 0.18);
   --glass-highlight: rgba(255, 255, 255, 0.95);
 }
 
@@ -32,11 +37,6 @@ html.light {
 [data-accent="violet"] { --accent-rgb: 168, 85, 247; --accent-glow: #a855f7; }
 [data-accent="emerald"] { --accent-rgb: 16, 185, 129; --accent-glow: #10b981; }
 [data-accent="rose"] { --accent-rgb: 244, 63, 94; --accent-glow: #f43f5e; }
-
-html[data-edge="off"] {
-  --glass-border: rgba(244, 254, 255, 0.05);
-  --glass-highlight: transparent;
-}
 
 html {
   scroll-behavior: smooth;
@@ -50,14 +50,15 @@ html {
 }
 
 /* ==========================================================================
-   CUSTOM IMAGE BACKGROUND WITH DARK AMBIENT VIGNETTE
+   DARK MODE BACKGROUND (Default)
    ========================================================================== */
 body {
-  background-color: #070d1a;
-  /* Replace '/bg-wallpaper.jpg' with the exact filename of your image in public/ */
+  background-color: #040812;
   background-image: 
-    linear-gradient(to bottom, rgba(7, 13, 26, 0.65), rgba(4, 8, 16, 0.88)),
-    url('/Levi Ackerman By @fusionwallvibe (2).jpg');
+    radial-gradient(circle at 8% 12%, rgba(56, 189, 248, 0.22) 0%, transparent 38%),
+    radial-gradient(circle at 92% 82%, rgba(56, 189, 248, 0.18) 0%, transparent 40%),
+    linear-gradient(to bottom, rgba(4, 8, 18, 0.55), rgba(4, 8, 18, 0.78)),
+    url('/bg-wallpaper.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -66,22 +67,35 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   overflow-x: hidden;
   min-height: 100vh;
+  transition: color 0.25s ease, background-color 0.25s ease;
 }
 
 /* ==========================================================================
-   ULTRA-CLEAR FLOATING LIQUID GLASS UI
+   LIGHT MODE BACKGROUND (Bright Ice Daylight Overlay + Crisp Contrast)
    ========================================================================== */
+html.light body {
+  background-color: #e8f3fe;
+  background-image: 
+    radial-gradient(circle at 12% 15%, rgba(56, 189, 248, 0.25) 0%, transparent 45%),
+    radial-gradient(circle at 88% 80%, rgba(14, 47, 118, 0.12) 0%, transparent 50%),
+    linear-gradient(to bottom, rgba(240, 248, 255, 0.82), rgba(224, 242, 254, 0.90)),
+    url('/bg-wallpaper.jpg');
+  color: #071638;
+}
 
+/* ==========================================================================
+   LIQUID GLASS CARDS (Dark & Light Mode)
+   ========================================================================== */
 .liquid-glass {
   position: relative;
   background: var(--glass-bg);
-  backdrop-filter: blur(var(--glass-blur)) saturate(200%);
-  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(200%);
+  backdrop-filter: blur(var(--glass-blur)) saturate(160%);
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(160%);
   border: 1px solid var(--glass-border);
   box-shadow:
-    0 20px 45px -8px rgba(2, 5, 12, 0.75),
-    0 4px 14px -2px rgba(0, 0, 0, 0.4),
-    inset 0 1.5px 2px 0 var(--glass-highlight);
+    0 16px 36px -8px rgba(0, 0, 0, 0.65),
+    0 4px 12px -2px rgba(0, 0, 0, 0.4),
+    inset 0 1px 1.5px 0 var(--glass-highlight);
   transform: translateZ(0);
   will-change: transform;
   transition:
@@ -89,6 +103,16 @@ body {
     border-color 0.25s ease,
     box-shadow 0.25s ease,
     background-color 0.25s ease;
+}
+
+html.light .liquid-glass {
+  backdrop-filter: blur(12px) saturate(180%);
+  -webkit-backdrop-filter: blur(12px) saturate(180%);
+  border: 1px solid rgba(14, 47, 118, 0.16);
+  box-shadow:
+    0 14px 32px -6px rgba(7, 22, 56, 0.14),
+    0 4px 12px -2px rgba(7, 22, 56, 0.08),
+    inset 0 1.5px 2px 0 rgba(255, 255, 255, 0.95);
 }
 
 .liquid-glass-interactive {
@@ -101,11 +125,17 @@ body {
 }
 
 .liquid-glass-interactive:hover {
-  border-color: rgba(var(--accent-rgb), 0.65);
+  border-color: rgba(56, 189, 248, 0.6);
   box-shadow:
-    0 22px 48px -8px rgba(var(--accent-rgb), 0.3),
-    0 6px 16px -2px rgba(0, 0, 0, 0.5),
-    inset 0 1.5px 2.5px 0 var(--glass-highlight);
+    0 20px 42px -8px rgba(56, 189, 248, 0.28),
+    inset 0 1.5px 2px 0 var(--glass-highlight);
+}
+
+html.light .liquid-glass-interactive:hover {
+  border-color: rgba(14, 47, 118, 0.4);
+  box-shadow:
+    0 18px 36px -8px rgba(14, 47, 118, 0.22),
+    inset 0 1.5px 2px 0 rgba(255, 255, 255, 1);
 }
 
 /* Specular diagonal sheen */
@@ -124,7 +154,7 @@ body {
   background: linear-gradient(
     90deg,
     transparent,
-    rgba(244, 254, 255, 0.2),
+    rgba(244, 254, 255, 0.18),
     transparent
   );
   transform: skewX(-25deg);
@@ -132,44 +162,56 @@ body {
   pointer-events: none;
 }
 
-html[data-reflections="off"] .liquid-sheen::before {
-  display: none;
-}
-
 .liquid-sheen:hover::before,
 .liquid-sheen:focus-visible::before {
   left: 150%;
 }
 
-/* Glass Pill Button */
+/* ==========================================================================
+   GLASS PILL BUTTONS & INPUTS (Dark & Light Mode)
+   ========================================================================== */
 .glass-pill {
-  background: rgba(244, 254, 255, 0.09);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  background: rgba(10, 18, 36, 0.45);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   border: 1px solid var(--glass-border);
   box-shadow: inset 0 1px 1px 0 var(--glass-highlight);
   transition: all 0.2s ease;
 }
 
-.glass-pill:hover {
-  border-color: rgba(var(--accent-rgb), 0.65);
-  background: rgba(var(--accent-rgb), 0.2);
+html.light .glass-pill {
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(14, 47, 118, 0.2);
+  color: #071638;
+  box-shadow:
+    0 4px 12px -2px rgba(7, 22, 56, 0.1),
+    inset 0 1px 1px 0 rgba(255, 255, 255, 1);
 }
 
-/* Custom Range Slider Thumb */
-.custom-range::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 22px;
-  height: 22px;
-  border-radius: 50%;
-  background: #ffffff;
-  box-shadow: 0 2px 8px rgba(7, 22, 56, 0.4), 0 0 0 2px rgba(56, 189, 248, 0.4);
-  cursor: pointer;
-  transition: transform 0.15s ease;
+.glass-pill:hover {
+  border-color: rgba(56, 189, 248, 0.65);
+  background: rgba(56, 189, 248, 0.2);
 }
-.custom-range::-webkit-slider-thumb:active {
-  transform: scale(1.12);
+
+html.light .glass-pill:hover {
+  border-color: rgba(14, 47, 118, 0.45);
+  background: rgba(224, 242, 254, 0.95);
+}
+
+/* Ensure any light-blue or muted text inside cards stays sharp in Light Mode */
+html.light .text-sky-300,
+html.light .text-sky-300\/95,
+html.light .text-sky-200 {
+  color: #0E2F76 !important;
+}
+
+html.light .text-sky-400 {
+  color: #0284c7 !important;
+}
+
+html.light input::placeholder,
+html.light textarea::placeholder {
+  color: rgba(7, 22, 56, 0.55) !important;
 }
 
 /* Custom Scrollbar */
