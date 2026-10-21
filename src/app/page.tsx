@@ -9,9 +9,8 @@ import LinkCard from '@/components/LinkCard';
 import MediaEmbeds from '@/components/MediaEmbeds';
 import ContactForm from '@/components/ContactForm';
 import AnalyticsModal from '@/components/AnalyticsModal';
-import ThemeCustomizer from '@/components/ThemeCustomizer';
 import ShareModal from '@/components/ShareModal';
-import { BarChart3, Sliders, Share2, CheckCircle2, Sparkles } from 'lucide-react';
+import { BarChart3, Share2, CheckCircle2, Sparkles } from 'lucide-react';
 import { AnimatePresence, motion } from 'framer-motion';
 
 export default function HomePage() {
@@ -20,54 +19,28 @@ export default function HomePage() {
   const [clicksMap, setClicksMap] = useState<Record<string, number>>({});
   const [toastMessage, setToastMessage] = useState<string | null>(null);
 
-  // Modals state
+  // Modals state (Theme customizer removed)
   const [isShareOpen, setIsShareOpen] = useState(false);
   const [isAnalyticsOpen, setIsAnalyticsOpen] = useState(false);
-  const [isCustomizerOpen, setIsCustomizerOpen] = useState(false);
 
-  // Theme states
-  const [themeMode, setThemeMode] = useState<'dark' | 'light'>(siteConfig.theme.defaultMode);
-  const [accent, setAccent] = useState<string>(siteConfig.theme.defaultAccent);
-  const [blurLevel, setBlurLevel] = useState<'sm' | 'md' | 'lg'>(siteConfig.theme.defaultBlur);
-
-  // Load saved analytics & theme preferences from localStorage on mount
+  // Load saved local click analytics on mount
   useEffect(() => {
     try {
       const storedClicks = localStorage.getItem('fusion_link_clicks');
       if (storedClicks) {
         setClicksMap(JSON.parse(storedClicks));
       }
-      const savedMode = localStorage.getItem('fusion_theme_mode') as 'dark' | 'light' | null;
-      const savedAccent = localStorage.getItem('fusion_theme_accent');
-      const savedBlur = localStorage.getItem('fusion_theme_blur') as 'sm' | 'md' | 'lg' | null;
-
-      if (savedMode) setThemeMode(savedMode);
-      if (savedAccent) setAccent(savedAccent);
-      if (savedBlur) setBlurLevel(savedBlur);
-    } catch {
-      // Ignore storage errors in private browsing
-    }
+    } catch {}
   }, []);
 
-  // Apply theme changes to HTML root element
+  // Lock default dark theme permanently on HTML root
   useEffect(() => {
     const root = document.documentElement;
-    if (themeMode === 'light') {
-      root.classList.add('light');
-      root.classList.remove('dark');
-    } else {
-      root.classList.add('dark');
-      root.classList.remove('light');
-    }
-    root.setAttribute('data-accent', accent);
-    root.setAttribute('data-blur', blurLevel);
-
-    try {
-      localStorage.setItem('fusion_theme_mode', themeMode);
-      localStorage.setItem('fusion_theme_accent', accent);
-      localStorage.setItem('fusion_theme_blur', blurLevel);
-    } catch {}
-  }, [themeMode, accent, blurLevel]);
+    root.classList.add('dark');
+    root.classList.remove('light');
+    root.setAttribute('data-accent', siteConfig.theme.defaultAccent);
+    root.setAttribute('data-blur', siteConfig.theme.defaultBlur);
+  }, []);
 
   const triggerToast = (msg: string) => {
     setToastMessage(msg);
@@ -109,41 +82,9 @@ export default function HomePage() {
   return (
     <div className="relative min-h-screen w-full overflow-hidden pb-20 pt-6 px-4 sm:px-6 flex flex-col items-center">
       {/* =================================================================
-          ULTRA-CLEAN, ZERO-LAG ADAPTIVE GRADIENT BACKGROUND
+          FLOATING TOP UTILITY BAR (Glass UI button removed)
           ================================================================= */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none fixed inset-0 -z-10 overflow-hidden transition-colors duration-500"
-      >
-        {/* Dynamic top-left accent ambient glow */}
-        <div
-          className="absolute -top-[10%] -left-[10%] h-[340px] w-[340px] sm:h-[460px] sm:w-[460px] rounded-full opacity-25 dark:opacity-30 transition-all duration-500"
-          style={{
-            background: 'radial-gradient(circle, var(--accent-glow) 0%, transparent 70%)',
-          }}
-        />
-        {/* Dynamic bottom-right royal/sky glow */}
-        <div
-          className="absolute bottom-[5%] -right-[10%] h-[320px] w-[320px] sm:h-[440px] sm:w-[440px] rounded-full opacity-20 dark:opacity-25 transition-all duration-500"
-          style={{
-            background: 'radial-gradient(circle, rgba(var(--accent-rgb), 0.8) 0%, transparent 70%)',
-          }}
-        />
-      </div>
-
-      {/* =================================================================
-          FLOATING TOP UTILITY BAR
-          ================================================================= */}
-      <header className="w-full max-w-xl flex items-center justify-between mb-6 z-20">
-        <button
-          onClick={() => setIsCustomizerOpen(true)}
-          aria-label="Customize Liquid Glass Theme"
-          className="glass-pill flex items-center gap-2 px-3.5 py-2 rounded-full text-xs font-medium tracking-wide active:scale-95"
-        >
-          <Sliders className="w-3.5 h-3.5 text-sky-400" />
-          <span>Glass UI</span>
-        </button>
-
+      <header className="w-full max-w-xl flex items-center justify-end mb-6 z-20">
         <div className="flex items-center gap-2">
           <button
             onClick={() => setIsAnalyticsOpen(true)}
@@ -232,13 +173,13 @@ export default function HomePage() {
           </AnimatePresence>
         </section>
 
-        {/* 5. Embedded Rich Media (Wallpaper Gallery, Spotify, Newsletter) */}
+        {/* 5. Embedded Rich Media */}
         <MediaEmbeds
           embeds={siteConfig.embeds}
           onNotifySuccess={(msg) => triggerToast(msg)}
         />
 
-        {/* 6. Serverless Contact Form (Web3Forms) */}
+        {/* 6. Contact Form */}
         {siteConfig.contact.enabled && (
           <ContactForm
             contact={siteConfig.contact}
@@ -277,19 +218,8 @@ export default function HomePage() {
       </AnimatePresence>
 
       {/* =================================================================
-          MODALS (Theme Customizer, Analytics, Share QR)
+          MODALS (Analytics & Share only)
           ================================================================= */}
-      <ThemeCustomizer
-        isOpen={isCustomizerOpen}
-        onClose={() => setIsCustomizerOpen(false)}
-        themeMode={themeMode}
-        onThemeModeChange={setThemeMode}
-        accent={accent}
-        onAccentChange={setAccent}
-        blurLevel={blurLevel}
-        onBlurLevelChange={setBlurLevel}
-      />
-
       <AnalyticsModal
         isOpen={isAnalyticsOpen}
         onClose={() => setIsAnalyticsOpen(false)}
