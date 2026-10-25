@@ -134,7 +134,7 @@ export const siteConfig: SiteConfig = {
       title: 'Website',
       subtitle: '4K download for phone and pc',
       url: 'https://fusion-wallpapers.vercel.app',
-      category: 'Wallpapers, projects',
+      category: 'Wallpapers, Projects',
       icon: '/IMG_20261025_201555.png',
     },
     {
