@@ -129,6 +129,14 @@ export const siteConfig: SiteConfig = {
   categories: ['All', 'Wallpapers', 'Social', 'Projects', 'Resources'],
 
   links: [
+     {
+      id: 'fusion-wallpapers',
+      title: 'Website',
+      subtitle: '4K download for phone and pc',
+      url: 'https://fusion-wallpapers.vercel.app',
+      category: 'Wallpapers, projects',
+      icon: '',
+    },
     {
       id: 'fusion-wallpapers',
       title: '4k Wallpapers',
